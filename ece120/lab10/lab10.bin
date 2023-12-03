@@ -1,6 +1,8 @@
 ; This is the file you will use for the lab assignment
 ; Make sure to comment your code properly and don't exceed 
 ; the line limitation for this assignment.  Good luck
+; Program loaded at x3100~x310B. Data stored at x3132~x313B. 
+; Written by QiRenyi on Monday, December 4, 2023 0:35 AM.
 0011 0001 0000 0000 ; x3100 - starting address of the program 
 ; this program is to add all the postive number in the set of 10 numbers
 ;        <Registers table>
