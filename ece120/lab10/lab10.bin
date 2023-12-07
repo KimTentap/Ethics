@@ -1,29 +1,29 @@
 ; This is the file you will use for the lab assignment
 ; Make sure to comment your code properly and don't exceed 
 ; the line limitation for this assignment.  Good luck
-; Program loaded at x3100~x310B. Data stored at x3132~x313B. 
+; Program loaded at x3100~x310C. Data stored at x3132~x313B. 
 ; Written by QiRenyi on Monday, December 4, 2023 0:35 AM.
-0011 0001 0000 0000 ; x3100 - starting address of the program 
+
+; The program description and code starts here
 ; this program is to add all the postive number in the set of 10 numbers
 ;        <Registers table>
 ; R2: addend, load number to be process
 ; R3: pointer to load the numbers in memory that are being analyzed, starting from address x3132
 ; R4: counter, from 10 to 0
 ; R5: start with 0, sum of the postive numbers
-; The program description and code starts here
-
-0101 101 101 0 00 000 ; x3100 - AND R5 <- R5&0      Initialize R5 to #0    - sum
-0101 100 100 0 00 000 ; x3101 - AND R4 <- R4&0      clear R4 to #0
-0001 100 100 1 01010  ; x3102 - ADD R4 <- R4+10     Initialize R4 to #10   - counter
-1110 011 000101100    ; x3103 - LEA R3 <- PC+x02C   Initialize R3 to x3131 - pointer
-                      ;                             [PC=x3104,Target=x3131,PCoffset9=x02D]
-0101 010 010 0 00 000 ; x3104 - AND R2 <- R5&0      Initialize R2 to #0
-0001 011 011 1 00001  ; x3105 - ADD R3 <- R3+1      update pointer
-0110 010 011 000000   ; x3106 - LDR R2 <- M[R3]     load addend based on pointer
-0000 110 000000001    ; x3107 - BRnz #1             skip if negative number
-                      ;                             [PC=x3108,Target=x3109,PCoffset9=x0001]
-0001 101 010 0 00 101 ; x3108 - ADD R5 <- R5+R2     ADD postive number
-0001 100 100 1 11111  ; x3109 - ADD R4 <- R4-1      update counter
-0000 001 111111010    ; x310A - BRp #6               jump to load another number
-                      ;                             [PC=x310B,Target=x3105,PCoffset9=xFFA]
-1111 0000 00100101    ; x310B - TRAP x25            HALT execution
+0011 0001 0000 0000   ; x3100 -                     starting address of the program 
+0101 101 101 0 00 000 ; x3101 - AND R5 <- R5&0      Initialize R5 to #0    - sum
+0101 100 100 0 00 000 ; x3102 - AND R4 <- R4&0      clear R4 to #0
+0001 100 100 1 01010  ; x3103 - ADD R4 <- R4+10     Initialize R4 to #10   - counter
+1110 011 000101100    ; x3104 - LEA R3 <- PC+x02C   Initialize R3 to x3131 - pointer
+                      ;                             [PC=x3105,Target=x3131,PCoffset9=x02C]
+0101 010 010 0 00 000 ; x3105 - AND R2 <- R5&0      Initialize R2 to #0
+0001 011 011 1 00001  ; x3106 - ADD R3 <- R3+1      update pointer
+0110 010 011 000000   ; x3107 - LDR R2 <- M[R3]     load addend based on pointer
+0000 110 000000001    ; x3108 - BRnz #1             skip if negative number
+                      ;                             [PC=x3109,Target=x310A,PCoffset9=x0001]
+0001 101 010 0 00 101 ; x3109 - ADD R5 <- R5+R2     ADD postive number
+0001 100 100 1 11111  ; x310A - ADD R4 <- R4-1      update counter
+0000 001 111111010    ; x310B - BRp #5               jump to load another number
+                      ;                             [PC=x310C,Target=x3106,PCoffset9=xFFA]
+1111 0000 00100101    ; x310C - TRAP  x25           HALT execution
