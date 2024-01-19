@@ -28,3 +28,9 @@
 0000 001 111111010    ; x310A - BRp #5               jump to load another number
                       ;                             [PC=x310B,Target=x3105,PCoffset9=xFFA]
 1111 0000 00100101    ; x310B - TRAP  x25           HALT execution
+
+
+
+
+666666666666666666
+11111111111
